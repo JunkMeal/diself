@@ -1,0 +1,31 @@
+{
+  "name": "diself",
+  "version": "0.1.0",
+  "description": "Discord Selfbot library",
+  "main": "index.js",
+  "directories": {
+    "example": "./example",
+    "lib": "./src"
+  },
+  "scripts": {
+    "example": "node ./example/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JunkMeal/diself.js.git"
+  },
+  "keywords": [
+    "discord",
+    "selfbot"
+  ],
+  "author": "JunkMeal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JunkMeal/diself.js/issues"
+  },
+  "homepage": "https://github.com/JunkMeal/diself.js#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "ws": "^8.1.0"
+  }
+}
