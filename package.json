@@ -19,7 +19,7 @@
     "selfbot"
   ],
   "author": "JunkMeal",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/JunkMeal/diself.js/issues"
   },
