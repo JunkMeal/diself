@@ -8,9 +8,9 @@ module.exports = class Client extends EventEmitter {
     super();
     let user_agent =
       "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/1.0.9002 Chrome/83.0.4103.122 Electron/9.3.5 Safari/537.36";
-    let x_super = Buffer.from(
+    let x_super = Buffer.from(`
       "{ os: "Windows", browser: "Discord Client", release_channel: "stable", client_version: "1.0.9002", os_version: "10.0.19042", os_arch: "x64", system_locale: "en-US", client_build_number: 91948, client_event_source: null, }"
-    ).toString("base64");
+    `).toString("base64");
     this.settings = {
       user_agent,
       x_super,
