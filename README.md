@@ -1,5 +1,5 @@
 # ⚠️ Under Development ⚠️
-[![Discord](https://img.shields.io/discord/ID?color=7289da&logo=discord&logoColor=white)](https://discord.gg/7GegDfCgNu)
+[![Discord](https://img.shields.io/discord/877570091250765904?color=7289da&logo=discord&logoColor=white)](https://discord.gg/7GegDfCgNu)
 
 Install using `npm i git+https://github.com/JunkMeal/diself.git`
 
