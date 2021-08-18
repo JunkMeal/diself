@@ -1,38 +1,38 @@
 {
-  "name": "diself",
-  "version": "0.1.0",
-  "description": "Discord selfbot library",
-  "main": "./src/index.js",
-  "types": "./src/index.d.ts",
-  "exports": {
-    "require": "./src/index.js"
-  },
-  "directories": {
-    "example": "./example",
-    "lib": "./src"
-  },
-  "scripts": {
-    "example": "node ./example/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JunkMeal/diself.git"
-  },
-  "keywords": [
-    "discord",
-    "selfbot"
-  ],
-  "author": "JunkMeal",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/JunkMeal/diself/issues"
-  },
-  "homepage": "https://github.com/JunkMeal/diself#readme",
-  "dependencies": {
-    "axios": "^0.21.1",
-    "ws": "^8.1.0"
-  },
-  "devDependencies": {
-    "dotenv": "^10.0.0"
-  }
+    "name": "diself",
+    "version": "0.1.0",
+    "description": "Discord selfbot library",
+    "main": "./src/index.js",
+    "types": "./src/index.d.ts",
+    "exports": {
+        "require": "./src/index.js"
+    },
+    "directories": {
+        "example": "./example",
+        "lib": "./src"
+    },
+    "scripts": {
+        "example": "node ./example/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/JunkMeal/diself.git"
+    },
+    "keywords": [
+        "discord",
+        "selfbot"
+    ],
+    "author": "JunkMeal",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/JunkMeal/diself/issues"
+    },
+    "homepage": "https://github.com/JunkMeal/diself#readme",
+    "dependencies": {
+        "axios": "^0.21.1",
+        "ws": "^8.1.0"
+    },
+    "devDependencies": {
+        "dotenv": "^10.0.0"
+    }
 }

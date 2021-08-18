@@ -1,6 +1,6 @@
 module.exports = class Embed {
     constructor(json) {
-        this.json = json ? json : {}
+        this.json = json ? json : {};
         if (!json) this.json.embed = {};
     }
 
@@ -15,10 +15,10 @@ module.exports = class Embed {
 
     /**
      * Sets the Embeds color
-     * @param {String} hex  
+     * @param {String} hex
      */
     setColor(hex) {
-        if (hex) this.json.embed.color = parseInt(hex.replace('#', ''), 16);
+        if (hex) this.json.embed.color = parseInt(hex.replace("#", ""), 16);
         return this;
     }
     /**
@@ -39,7 +39,7 @@ module.exports = class Embed {
     }
     /**
      * Sets the Embeds timestamp
-     * @param {Date} date 
+     * @param {Date} date
      */
     setTimestamp(date) {
         if (date) this.json.embed.timestamp = date.toISOString();
@@ -47,7 +47,7 @@ module.exports = class Embed {
     }
     /**
      * Sets url for the title
-     * @param {String} url 
+     * @param {String} url
      */
     setUrl(url) {
         if (url) this.json.embed.url = url;
@@ -55,50 +55,50 @@ module.exports = class Embed {
     }
     /**
      * Sets footer for the embed
-     * @param {Object} footer 
+     * @param {Object} footer
      */
     setFooter(footer) {
         if (!this.json.embed.footer && (footer.text || footer.icon)) this.json.embed.footer = {};
-        if (footer.text) this.json.embed.footer.text = footer.text
-        if (footer.icon) this.json.embed.footer.icon_url = footer.icon
+        if (footer.text) this.json.embed.footer.text = footer.text;
+        if (footer.icon) this.json.embed.footer.icon_url = footer.icon;
         return this;
     }
     /**
      * Sets author for the embed
-     * @param {Object} author 
+     * @param {Object} author
      */
     setAuthor(author) {
-        if (!this.json.embed.author && (author.name || author.icon || author.url)) this.json.embed.author = {}
-        if (author.name) this.json.embed.author.name = author.name
-        if (author.icon) this.json.embed.author.icon_url = author.icon
-        if (author.url) this.json.embed.author.url = author.url
+        if (!this.json.embed.author && (author.name || author.icon || author.url)) this.json.embed.author = {};
+        if (author.name) this.json.embed.author.name = author.name;
+        if (author.icon) this.json.embed.author.icon_url = author.icon;
+        if (author.url) this.json.embed.author.url = author.url;
         return this;
     }
     /**
      * Adds a field to the embed
-     * @param {Object} field 
+     * @param {Object} field
      */
     addField(field) {
-        if (!this.json.embed.fields) this.json.embed.fields = []
-        this.json.embed.fields.push(field)
+        if (!this.json.embed.fields) this.json.embed.fields = [];
+        this.json.embed.fields.push(field);
         return this;
     }
     /**
      * Sets thumbnail for the embed
-     * @param {String} image_url 
+     * @param {String} image_url
      */
-    setThumbnail(image_url){
-        if(!this.json.embed.thumbnail) this.json.embed.thumbnail = {}
-        this.json.embed.thumbnail.url = image_url
+    setThumbnail(image_url) {
+        if (!this.json.embed.thumbnail) this.json.embed.thumbnail = {};
+        this.json.embed.thumbnail.url = image_url;
         return this;
     }
     /**
      * Sets image for the embed
-     * @param {String} image_url 
+     * @param {String} image_url
      */
-    setImage(image_url){
-        if(!this.json.embed.image) this.json.embed.image = {}
-        this.json.embed.image.url = image_url
+    setImage(image_url) {
+        if (!this.json.embed.image) this.json.embed.image = {};
+        this.json.embed.image.url = image_url;
         return this;
     }
     /**
@@ -108,4 +108,4 @@ module.exports = class Embed {
     getJson() {
         return this.json;
     }
-}
+};
