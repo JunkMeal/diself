@@ -6,10 +6,10 @@ module.exports = class Embed {
 
     /**
      * Adds a normal message to the embed.
-     * @param {String} data 
+     * @param {String} message
      */
-    setMessage(data) {
-        if (data) this.json.content = data;
+    setMessage(message) {
+        if (message) this.json.content = data;
         return this;
     }
 
@@ -31,10 +31,10 @@ module.exports = class Embed {
     }
     /**
      * Sets the Embeds description
-     * @param {String} desc 
+     * @param {String} description
      */
-    setDescription(desc) {
-        if (desc) this.json.embed.description = desc;
+    setDescription(description) {
+        if (desc) this.json.embed.description = description;
         return this;
     }
     /**
@@ -58,7 +58,7 @@ module.exports = class Embed {
      * @param {Object} footer 
      */
     setFooter(footer) {
-        if (!this.json.embed.footer && (footer.text || footer.icon)) this.json.embed.footer = {}
+        if (!this.json.embed.footer && (footer.text || footer.icon)) this.json.embed.footer = {};
         if (footer.text) this.json.embed.footer.text = footer.text
         if (footer.icon) this.json.embed.footer.icon_url = footer.icon
         return this;

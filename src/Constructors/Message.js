@@ -1,31 +1,33 @@
+const Embed = require("../Constructors/Embed.js");
 module.exports = class Message {
-    constructor(m, client){
-       this.tts = m.tts
-       this.timestamp = new Date(m.timestamp)
-       if(m.referenced_message) this.referenced_message = m.referenced_message
-       this.pinned = m.pinned
-       this.mentions = m.mentions
-       this.mention_roles = m.mention_roles
-       this.mention_everyone = m.mention_everyone
-       this.id = m.id
-       this.flags = m.flags
-       this.embeds = m.embeds
-       if(m.edited_timestamp) this.edited_timestamp = m.edited_timestamp
-       this.content = m.content
-       this.components = m.components
+    constructor(message, client){
+       this.tts = message.tts
+       this.timestamp = new Date(message.timestamp)
+       if(message.referenced_message) this.referenced_message = new Message(message.referenced_message,client)
+       this.pinned = message.pinned
+       this.mentions = message.mentions
+       this.mention_roles = message.mention_roles
+       this.mention_everyone = message.mention_everyone
+       this.id = message.id
+       this.flags = message.flags
+       this.embeds = [];
+       for (const embed of message.embeds) this.embeds.push(embed)
+       if(message.edited_timestamp) this.edited_timestamp = message.edited_timestamp
+       this.content = message.content
+       this.components = message.components
        this.channel = {
-       id: m.channel_id,
+       id: message.channel_id,
        /**
         * Sends a message to the message channel
         * @param {String} message 
         * @returns {Message}
         */
        send: async (message) => {
-            return new Message(await client.sendMessage(message,m.channel_id), client)
+            return await client.sendMessage(message, this.channel.id)
         } 
     }
-        this.author = m.author
-        this.attachments = m.attachments,
+        this.author = message.author
+        this.attachments = message.attachments,
         /**
          * Deletes the message.
          */

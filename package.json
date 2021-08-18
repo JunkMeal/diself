@@ -1,11 +1,12 @@
 {
   "name": "diself",
   "version": "0.1.0",
-  "description": "Discord Selfbot library",
+  "description": "Discord selfbot library",
   "main": "./src/index.js",
+  "types": "./src/index.d.ts",
   "exports": {
     "require": "./src/index.js"
-},
+  },
   "directories": {
     "example": "./example",
     "lib": "./src"
@@ -30,5 +31,8 @@
   "dependencies": {
     "axios": "^0.21.1",
     "ws": "^8.1.0"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0"
   }
 }

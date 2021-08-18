@@ -1,15 +1,14 @@
-const Message = require("./Message.js")
 module.exports = class Reaction {
-    constructor(r,client){
-        this.user_id = r.user_id
-        this.message_id = r.message_id
-        this.emoji = r.emoji
+    constructor(reaction, client){
+        this.user_id = reaction.user_id
+        this.message_id = reaction.message_id
+        this.emoji = reaction.emoji
         this.channel = {
-            id:r.channel_id,
+            id: reaction.channel_id,
             send: async (message) => {
-                return new Message(await client.sendMessage(message,m.channel_id), client)
+                return await client.sendMessage(message, reaction.channel_id)
             } 
         }
-        this.emoji.full = r.emoji.id ? `<:${this.emoji.name}:${this.emoji.id}>` : this.emoji.name
+        this.emoji.full = reaction.emoji.id ? `<:${this.emoji.name}:${this.emoji.id}>` : this.emoji.name
     }
 }

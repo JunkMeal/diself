@@ -55,7 +55,6 @@ module.exports = class Client extends EventEmitter {
     if (externalHeaders) Object.assign(options.headers, externalHeaders);
     data ? (options.data = data) : null;
     let res = await axios(options).catch((error) => {
-      console.log(error);
       throw new Error("Request failed");
     });
     return res.data;
@@ -76,7 +75,6 @@ module.exports = class Client extends EventEmitter {
     options.headers = headers;
     data ? (options.data = data) : (options.data = null);
     let res = await axios(options).catch((error) => {
-      console.log(error);
       throw new Error("Request failed");
     });
     return res;
@@ -85,10 +83,10 @@ module.exports = class Client extends EventEmitter {
   /**
    * Sents a Message to a channel
    * @param {String} message
-   * @param {String} channelid
+   * @param {String} channel_id
    * @returns {Message}
    */
-  sendMessage = async (message, channelid) => {
+  sendMessage = async (message, channel_id) => {
     let data;
     if (typeof message == "string") data = { content: message };
     if (typeof message == "object") data = message;
@@ -96,9 +94,9 @@ module.exports = class Client extends EventEmitter {
     if (!data) throw new Error("Invalid Message");
     let req = await this.request(
       "POST",
-      `channels/${channelid}/messages`,
+      `channels/${channel_id}/messages`,
       data
     );
-    return req;
+    return new Message(req, this);
   };
 };
