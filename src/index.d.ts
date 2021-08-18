@@ -1,8 +1,10 @@
 export class Client {
+    constructor(settings: { compression: boolean });
     settings: {
         user_agent: string;
         x_super: string;
         api_url: string;
+        compression: boolean;
     };
     start(token: string): void;
     sendMessage(message: string, channel_id_: string): Message;

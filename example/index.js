@@ -1,6 +1,7 @@
 require("dotenv").config();
 const diself = require("../src");
 const client = new diself.Client();
+
 // Load commands
 require("./loader.js")(client);
 

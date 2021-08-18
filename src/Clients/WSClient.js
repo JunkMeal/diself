@@ -1,15 +1,24 @@
 const EventEmitter = require("events").EventEmitter;
 const Message = require("../Constructors/Message.js");
 const Reaction = require("../Constructors/Reaction.js");
+const zlib = require("zlib-sync");
 
 class WSClient extends EventEmitter {
-    constructor(gateway) {
+    constructor(gateway, compression) {
         super();
         this.gateway = gateway;
+        this.compression = compression;
+        if (this.compression)
+            this.inflate = new zlib.Inflate({
+                chunkSize: 65535,
+                flush: zlib.Z_SYNC_FLUSH,
+                to: "json",
+            });
     }
     start(token, client) {
         const WS = require("ws");
         const ws = new WS(this.gateway);
+        console.log(this.gateway);
         ws.on("open", function open() {
             let data = {
                 op: 2,
@@ -28,6 +37,15 @@ class WSClient extends EventEmitter {
         ws.on(
             "message",
             function incoming(data) {
+                if (this.compression) {
+                    if (data instanceof ArrayBuffer) data = new Uint8Array(data);
+                    const l = data.length;
+                    const flush = l >= 4 && data[l - 4] === 0x00 && data[l - 3] === 0x00 && data[l - 2] === 0xff && data[l - 1] === 0xff;
+
+                    this.inflate.push(data, flush && zlib.Z_SYNC_FLUSH);
+                    if (!flush) return;
+                    data = this.inflate.result;
+                }
                 data = JSON.parse(data);
                 if (data.s) this.sequence = data.s;
                 if (data.op == 11) {

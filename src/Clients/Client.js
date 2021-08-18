@@ -4,7 +4,9 @@ const axios = require("axios").default;
 const Message = require("../Constructors/Message.js");
 
 module.exports = class Client extends EventEmitter {
-    constructor() {
+    constructor(settings) {
+        if (settings.compression === false) settings.compression = false;
+        else settings.compression = true;
         super();
         let user_agent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/1.0.9002 Chrome/83.0.4103.122 Electron/9.3.5 Safari/537.36";
         let x_super = Buffer.from(
@@ -14,6 +16,7 @@ module.exports = class Client extends EventEmitter {
             user_agent,
             x_super,
             api_url: "https://discord.com/api/v9/",
+            compression: settings.compression,
         };
     }
 
@@ -23,7 +26,7 @@ module.exports = class Client extends EventEmitter {
      */
     start(token) {
         this.settings.token = token;
-        const ws = new WSClient("wss://gateway.discord.gg/?encoding=json&v=9");
+        const ws = new WSClient(`wss://gateway.discord.gg/?encoding=json&v=9${this.settings.compression ? "&compress=zlib-stream" : ""}`, this.settings.compression);
         ws.start(token, this);
         ws.on("READY", (user) => {
             this.user = user;

@@ -30,7 +30,8 @@
     "homepage": "https://github.com/JunkMeal/diself#readme",
     "dependencies": {
         "axios": "^0.21.1",
-        "ws": "^8.1.0"
+        "ws": "^8.1.0",
+        "zlib-sync": "^0.1.7"
     },
     "devDependencies": {
         "dotenv": "^10.0.0"
