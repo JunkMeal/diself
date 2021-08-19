@@ -2,9 +2,12 @@ const EventEmitter = require("events").EventEmitter;
 const WSClient = require("./WSClient.js");
 const axios = require("axios").default;
 const Message = require("../Constructors/Message.js");
+const FormData = require("form-data");
+var _ = require("lodash");
 
 module.exports = class Client extends EventEmitter {
     constructor(settings) {
+        if (!settings) settings = {};
         if (settings.compression === false) settings.compression = false;
         else settings.compression = true;
         super();
@@ -84,17 +87,34 @@ module.exports = class Client extends EventEmitter {
 
     /**
      * Sents a Message to a channel
-     * @param {String} message
+     * @param {Object} message
      * @param {String} channel_id
      * @returns {Message}
      */
     sendMessage = async (message, channel_id) => {
-        let data;
-        if (typeof message == "string") data = { content: message };
-        if (typeof message == "object") data = message;
-        if (message?.constructor.name == "Embed") data = message.getJson();
+        let data = {};
+        if (message.content) data.content = message.content;
+        if (message.embed) data.embed = message.embed.json;
+        if (message.file) {
+            let stream = await this.#getStream(message.file);
+            const form = new FormData();
+            form.append("file", stream);
+            form.append("payload_json", JSON.stringify(_.isEmpty(data) ? { content: "" } : data));
+
+            let req = await this.request("POST", `channels/${channel_id}/messages`, form, form.getHeaders());
+            return new Message(req, this);
+        }
         if (!data) throw new Error("Invalid Message");
         let req = await this.request("POST", `channels/${channel_id}/messages`, data);
         return new Message(req, this);
+    };
+
+    #getStream = async (path) => {
+        if (path?.constructor?.name == "ReadStream" || path?.constructor?.name == "Buffer") return path;
+        if (path.startsWith("http")) {
+            let res = await axios.get(path, { responseType: "stream" });
+            return res.data;
+        }
+        return fs.createReadStream(path);
     };
 };

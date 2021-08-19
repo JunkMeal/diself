@@ -24,7 +24,8 @@ client.on("MESSAGE_CREATE", async (message) => {
         // Execute command
         await client.commands.get(command)(message, args, client);
     } catch (error) {
-        let m = await message.channel.send("There was an error while executing this command!");
+        console.error(error);
+        let m = await message.channel.send({ content: "There was an error while executing this command!" });
         setTimeout(async () => {
             await m.delete();
         }, 3000);

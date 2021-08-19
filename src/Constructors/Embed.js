@@ -1,16 +1,6 @@
 module.exports = class Embed {
     constructor(json) {
         this.json = json ? json : {};
-        if (!json) this.json.embed = {};
-    }
-
-    /**
-     * Adds a normal message to the embed.
-     * @param {String} message
-     */
-    setMessage(message) {
-        if (message) this.json.content = data;
-        return this;
     }
 
     /**
@@ -18,7 +8,7 @@ module.exports = class Embed {
      * @param {String} hex
      */
     setColor(hex) {
-        if (hex) this.json.embed.color = parseInt(hex.replace("#", ""), 16);
+        if (hex) this.json.color = parseInt(hex.replace("#", ""), 16);
         return this;
     }
     /**
@@ -26,7 +16,7 @@ module.exports = class Embed {
      * @param {String} title
      */
     setTitle(title) {
-        if (title) this.json.embed.title = title;
+        if (title) this.json.title = title;
         return this;
     }
     /**
@@ -34,7 +24,7 @@ module.exports = class Embed {
      * @param {String} description
      */
     setDescription(description) {
-        if (desc) this.json.embed.description = description;
+        if (desc) this.json.description = description;
         return this;
     }
     /**
@@ -42,7 +32,7 @@ module.exports = class Embed {
      * @param {Date} date
      */
     setTimestamp(date) {
-        if (date) this.json.embed.timestamp = date.toISOString();
+        if (date) this.json.timestamp = date.toISOString();
         return this;
     }
     /**
@@ -50,7 +40,7 @@ module.exports = class Embed {
      * @param {String} url
      */
     setUrl(url) {
-        if (url) this.json.embed.url = url;
+        if (url) this.json.url = url;
         return this;
     }
     /**
@@ -58,9 +48,9 @@ module.exports = class Embed {
      * @param {Object} footer
      */
     setFooter(footer) {
-        if (!this.json.embed.footer && (footer.text || footer.icon)) this.json.embed.footer = {};
-        if (footer.text) this.json.embed.footer.text = footer.text;
-        if (footer.icon) this.json.embed.footer.icon_url = footer.icon;
+        if (!this.json.footer && (footer.text || footer.icon)) this.json.footer = {};
+        if (footer.text) this.json.footer.text = footer.text;
+        if (footer.icon) this.json.footer.icon_url = footer.icon;
         return this;
     }
     /**
@@ -68,10 +58,10 @@ module.exports = class Embed {
      * @param {Object} author
      */
     setAuthor(author) {
-        if (!this.json.embed.author && (author.name || author.icon || author.url)) this.json.embed.author = {};
-        if (author.name) this.json.embed.author.name = author.name;
-        if (author.icon) this.json.embed.author.icon_url = author.icon;
-        if (author.url) this.json.embed.author.url = author.url;
+        if (!this.json.author && (author.name || author.icon || author.url)) this.json.author = {};
+        if (author.name) this.json.author.name = author.name;
+        if (author.icon) this.json.author.icon_url = author.icon;
+        if (author.url) this.json.author.url = author.url;
         return this;
     }
     /**
@@ -79,8 +69,8 @@ module.exports = class Embed {
      * @param {Object} field
      */
     addField(field) {
-        if (!this.json.embed.fields) this.json.embed.fields = [];
-        this.json.embed.fields.push(field);
+        if (!this.json.fields) this.json.fields = [];
+        this.json.fields.push(field);
         return this;
     }
     /**
@@ -88,8 +78,8 @@ module.exports = class Embed {
      * @param {String} image_url
      */
     setThumbnail(image_url) {
-        if (!this.json.embed.thumbnail) this.json.embed.thumbnail = {};
-        this.json.embed.thumbnail.url = image_url;
+        if (!this.json.thumbnail) this.json.thumbnail = {};
+        this.json.thumbnail.url = image_url;
         return this;
     }
     /**
@@ -97,15 +87,8 @@ module.exports = class Embed {
      * @param {String} image_url
      */
     setImage(image_url) {
-        if (!this.json.embed.image) this.json.embed.image = {};
-        this.json.embed.image.url = image_url;
+        if (!this.json.image) this.json.image = {};
+        this.json.image.url = image_url;
         return this;
-    }
-    /**
-     * Returns the json for the whole embed
-     * @returns {Object}
-     */
-    getJson() {
-        return this.json;
     }
 };

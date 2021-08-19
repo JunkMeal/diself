@@ -29,7 +29,7 @@ export class Message {
     components: object[];
     channel: {
         id: string;
-        send(message: string): Message;
+        send(message: { content?: string; embed?: Embed; file?: string | Buffer | ReadableStream }): Message;
     };
     author: object;
     attachments: object[];
@@ -39,7 +39,6 @@ export class Message {
 
 export class Embed {
     constructor(json: object);
-    setMessage(message: string): Embed;
     setColor(hex: string): Embed;
     setTitle(title: string): Embed;
     setDescription(description: string): Embed;
