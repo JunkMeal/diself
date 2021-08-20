@@ -1,6 +1,6 @@
-const Embed = require("../Constructors/Embed.js");
 module.exports = class Message {
     constructor(message, client) {
+        this.client = client;
         this.tts = message.tts;
         this.timestamp = new Date(message.timestamp);
         if (message.referenced_message) this.referenced_message = new Message(message.referenced_message, client);
@@ -23,7 +23,7 @@ module.exports = class Message {
              * @returns {Message}
              */
             send: async (message) => {
-                return await client.sendMessage(message, this.channel.id);
+                return client.sendMessage(message, this.channel.id);
             },
         };
         this.author = message.author;

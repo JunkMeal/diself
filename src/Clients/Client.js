@@ -4,6 +4,7 @@ const axios = require("axios").default;
 const Message = require("../Constructors/Message.js");
 const FormData = require("form-data");
 var _ = require("lodash");
+const fs = require("fs");
 
 module.exports = class Client extends EventEmitter {
     constructor(settings) {

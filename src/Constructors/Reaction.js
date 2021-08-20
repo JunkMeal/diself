@@ -6,7 +6,7 @@ module.exports = class Reaction {
         this.channel = {
             id: reaction.channel_id,
             send: async (message) => {
-                return await client.sendMessage(message, reaction.channel_id);
+                return client.sendMessage(message, reaction.channel_id);
             },
         };
         this.emoji.full = reaction.emoji.id ? `<:${this.emoji.name}:${this.emoji.id}>` : this.emoji.name;

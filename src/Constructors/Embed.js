@@ -24,7 +24,7 @@ module.exports = class Embed {
      * @param {String} description
      */
     setDescription(description) {
-        if (desc) this.json.description = description;
+        if (description) this.json.description = description;
         return this;
     }
     /**

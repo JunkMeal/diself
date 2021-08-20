@@ -15,6 +15,7 @@ export class Client {
 }
 
 export class Message {
+    client: Client;
     tts: boolean;
     timestamp: Date;
     referenced_message?: Message;
@@ -60,4 +61,10 @@ export class Reaction {
         send(message: string): Message;
     };
     emoji: { name: string; id: string | null; full: string };
+}
+
+export class ReactionCollector {
+    constructor(message: Message, filter: function, options: { time: number });
+    on(event: "collect", listener: (reaction: Reaction) => void): this;
+    on(event: "end", listener: () => void): this;
 }
