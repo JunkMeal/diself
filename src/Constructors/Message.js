@@ -25,6 +25,15 @@ module.exports = class Message {
             send: async (message) => {
                 return client.sendMessage(message, this.channel.id);
             },
+            search: async (search) => {
+                if (search.content) search.content = encodeURIComponent(search.content);
+                let params = new URLSearchParams(search);
+                let res = await client.request("GET", `channels/${this.channel.id}/messages/search?{${params.toString().replace(/%2520/g, "%20")}`);
+                if (res.retry_after) {
+                    await require("util").promisify(setTimeout)(res.retry_after);
+                    return this.channel.search(search);
+                } else return res;
+            },
         };
         this.author = message.author;
         this.attachments = message.attachments;
