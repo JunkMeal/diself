@@ -60,7 +60,6 @@ module.exports = class Client extends EventEmitter {
         };
         if (externalHeaders) Object.assign(options.headers, externalHeaders);
         data ? (options.data = data) : null;
-        console.log(options);
         let res = await axios(options).catch((error) => {
             console.error(error);
             throw new Error("Request failed");
