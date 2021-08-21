@@ -18,7 +18,6 @@ class WSClient extends EventEmitter {
     start(token, client) {
         const WS = require("ws");
         const ws = new WS(this.gateway);
-        console.log(this.gateway);
         ws.on("open", function open() {
             let data = {
                 op: 2,
@@ -48,14 +47,14 @@ class WSClient extends EventEmitter {
                 }
                 data = JSON.parse(data);
                 if (data.s) this.sequence = data.s;
-                if (data.op == 11) {
+                if (data.op === 11) {
                     //recieved HeartBeat
                     this.emit("heartbeat", {
                         sequence: this.sequence,
                         interval: this.heartbeat,
                     });
                 }
-                if (data.op == 10) {
+                if (data.op === 10) {
                     //hello
                     this.heartbeat = data.d.heartbeat_interval;
                     this.interval = setInterval(() => {

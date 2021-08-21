@@ -83,6 +83,7 @@ module.exports = class Client extends EventEmitter {
         options.headers = headers;
         data ? (options.data = data) : (options.data = null);
         let res = await axios(options).catch((error) => {
+            console.error(error);
             throw new Error("Request failed");
         });
         return res;
@@ -113,7 +114,7 @@ module.exports = class Client extends EventEmitter {
     };
 
     #getStream = async (path) => {
-        if (path?.constructor?.name == "ReadStream" || path?.constructor?.name == "Buffer") return path;
+        if (path?.constructor?.name === "ReadStream" || path?.constructor?.name === "Buffer") return path;
         if (path.startsWith("http")) {
             let res = await axios.get(path, { responseType: "stream" });
             return res.data;
