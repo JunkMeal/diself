@@ -1,9 +1,10 @@
+const Search = require("./Payloads/Search.js");
 module.exports = class Message {
     constructor(message, client) {
         this.client = client;
         this.tts = message.tts;
         this.timestamp = new Date(message.timestamp);
-        if (message.referenced_message) this.referenced_message = new Message(message.referenced_message, client);
+        message.referenced_message && (this.referenced_message = new Message(message.referenced_message, client));
         this.pinned = message.pinned;
         this.mentions = message.mentions;
         this.mention_roles = message.mention_roles;
@@ -12,7 +13,7 @@ module.exports = class Message {
         this.flags = message.flags;
         this.embeds = [];
         for (const embed of message.embeds) this.embeds.push(embed);
-        if (message.edited_timestamp) this.edited_timestamp = message.edited_timestamp;
+        message.edited_timestamp && (this.edited_timestamp = message.edited_timestamp);
         this.content = message.content;
         this.components = message.components;
         this.channel = {
@@ -26,9 +27,11 @@ module.exports = class Message {
                 return client.sendMessage(message, this.channel.id);
             },
             search: async (search) => {
+                search = new Search(search);
                 if (search.content) search.content = encodeURIComponent(search.content);
                 let params = new URLSearchParams(search);
-                let res = await client.request("GET", `channels/${this.channel.id}/messages/search?{${params.toString().replace(/%2520/g, "%20")}`);
+                console.log(params.toString().replace(/%2520/g, "%20"));
+                let res = await client.request("GET", `channels/${this.channel.id}/messages/search?${params.toString().replace(/%2520/g, "%20")}`);
                 if (res.retry_after) {
                     await require("util").promisify(setTimeout)(res.retry_after);
                     return this.channel.search(search);

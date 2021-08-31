@@ -12,7 +12,7 @@
         "lib": "./src"
     },
     "scripts": {
-        "example": "node ./example/index.js"
+        "example": "clear && node ./example/index.js"
     },
     "repository": {
         "type": "git",

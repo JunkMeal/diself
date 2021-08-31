@@ -59,8 +59,7 @@ module.exports = class Client extends EventEmitter {
             "x-super-properties": this.settings.x_super,
         };
         if (externalHeaders) Object.assign(options.headers, externalHeaders);
-        data ? (options.data = data) : null;
-        console.log(options);
+        data && (options.data = data);
         let res = await axios(options).catch((error) => {
             console.error(error);
             throw new Error("Request failed");
@@ -81,7 +80,7 @@ module.exports = class Client extends EventEmitter {
         options.method = method;
         options.url = url;
         options.headers = headers;
-        data ? (options.data = data) : (options.data = null);
+        data && (options.data = data);
         let res = await axios(options).catch((error) => {
             console.error(error);
             throw new Error("Request failed");
@@ -114,7 +113,7 @@ module.exports = class Client extends EventEmitter {
     };
 
     #getStream = async (path) => {
-        if (path?.constructor?.name === "ReadStream" || path?.constructor?.name === "Buffer") return path;
+        if (path?.constructor?.name === "ReadStream") return path;
         if (path.startsWith("http")) {
             let res = await axios.get(path, { responseType: "stream" });
             return res.data;
