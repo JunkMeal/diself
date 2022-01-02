@@ -53,5 +53,9 @@ module.exports = class Message {
         this.react = async (reaction) => {
             await client.request("PUT", `channels/${this.channel.id}/messages/${this.id}/reactions/${encodeURIComponent(reaction)}/@me`);
         };
+
+        this.edit = async (message) => {
+            return client.editMessage(message, this.channel.id, this.id);
+        }
     }
 };

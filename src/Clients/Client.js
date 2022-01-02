@@ -112,6 +112,24 @@ module.exports = class Client extends EventEmitter {
         return new Message(req, this);
     };
 
+    editMessage = async (message, channel_id, message_id) => {
+        let data = {};
+        if (message.content) data.content = message.content;
+        if (message.embed) data.embed = message.embed.json;
+        if (message.file) {
+            let stream = await this.#getStream(message.file);
+            const form = new FormData();
+            form.append("file", stream);
+            form.append("payload_json", JSON.stringify(_.isEmpty(data) ? { content: "" } : data));
+
+            let req = await this.request("PATCH", `channels/${channel_id}/messages/${message_id}`, form, form.getHeaders());
+            return new Message(req, this);
+        }
+        if (!data) throw new Error("Invalid Message");
+        let req = await this.request("PATCH", `channels/${channel_id}/messages/${message_id}`, data);
+        return new Message(req, this);
+    };
+
     #getStream = async (path) => {
         if (path?.constructor?.name === "ReadStream") return path;
         if (path.startsWith("http")) {
